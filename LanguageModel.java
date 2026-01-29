@@ -58,7 +58,6 @@ public class LanguageModel {
             }
             current = current.next;
         }
-        // Fallback: return the last character if something goes slightly wrong with precision
         return probs.get(probs.getSize() - 1).chr;
     }
 
@@ -78,7 +77,6 @@ public class LanguageModel {
             }
         }
 
-        // Processes the entire text, one character at a time
         while (!in.isEmpty()) {
             c = in.readChar();
             

@@ -23,7 +23,6 @@ public class List {
 
     /** Returns the first element in the list */
     public CharData getFirst() {
-        // TIKUN: Protection against empty list crash
         if (first == null) {
             return null;
         }
@@ -66,7 +65,6 @@ public class List {
             }
             current = current.next;
         }
-        // Character not found, add to beginning
         addFirst(chr);
     }
 
@@ -101,10 +99,6 @@ public class List {
         Node current = first;
         for (int i = 0; i < index; i++) {
             current = current.next;
-        }
-        // TIKUN: Extra safety check
-        if (current == null) {
-            throw new IndexOutOfBoundsException();
         }
         return current.cp;
     }
