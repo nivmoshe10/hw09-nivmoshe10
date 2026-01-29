@@ -65,7 +65,6 @@ public class List {
             }
             current = current.next;
         }
-        // If we reached here, the character was not found
         addFirst(chr);
     }
 
