@@ -23,7 +23,6 @@ public class List {
 
     /** Returns the first element in the list */
     public CharData getFirst() {
-        // FIX: Prevents crash when list is empty
         if (first == null) {
             return null;
         }
