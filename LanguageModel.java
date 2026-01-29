@@ -79,17 +79,12 @@ public class LanguageModel {
 
         while (!in.isEmpty()) {
             c = in.readChar();
-            
             List probs = CharDataMap.get(window);
-            
             if (probs == null) {
                 probs = new List();
                 CharDataMap.put(window, probs);
             }
-            
             probs.update(c);
-            
-            // Slide the window
             window = window.substring(1) + c;
         }
 
@@ -109,14 +104,11 @@ public class LanguageModel {
 
         while (generatedText.length() < textLength) {
             List probs = CharDataMap.get(window);
-            
             if (probs == null) {
                 break;
             }
-
             char nextChar = getRandomChar(probs);
             generatedText += nextChar;
-            
             window = generatedText.substring(generatedText.length() - windowLength);
         }
 

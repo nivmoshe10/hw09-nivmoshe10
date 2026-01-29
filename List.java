@@ -128,16 +128,16 @@ public class List {
     /** Returns a textual representation of this list. */
     public String toString() {
         if (size == 0) return "()";
-        String res = "(";
+        StringBuilder str = new StringBuilder("(");
         Node current = first;
         while (current != null) {
-            res += current.cp.toString();
+            str.append(current.cp.toString());
             if (current.next != null) {
-                res += " ";
+                str.append(" ");
             }
             current = current.next;
         }
-        res += ")";
-        return res;
+        str.append(")");
+        return str.toString();
     }
 }
