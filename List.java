@@ -65,6 +65,7 @@ public class List {
             }
             current = current.next;
         }
+        // If we get here, the character is not in the list, so we add it.
         addFirst(chr);
     }
 
@@ -128,16 +129,16 @@ public class List {
     /** Returns a textual representation of this list. */
     public String toString() {
         if (size == 0) return "()";
-        StringBuilder str = new StringBuilder("(");
+        String res = "(";
         Node current = first;
         while (current != null) {
-            str.append(current.cp.toString());
+            res += current.cp.toString();
             if (current.next != null) {
-                str.append(" ");
+                res += " ";
             }
             current = current.next;
         }
-        str.append(")");
-        return str.toString();
+        res += ")";
+        return res;
     }
 }
