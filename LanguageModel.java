@@ -102,7 +102,9 @@ public class LanguageModel {
         String window = initialText.substring(initialText.length() - windowLength);
         String generatedText = initialText;
 
-        while (generatedText.length() < textLength) {
+        // FIXED: Generate until length is initial + requested length.
+        // This solves the "mo" vs "modified" issue.
+        while (generatedText.length() < initialText.length() + textLength) {
             List probs = CharDataMap.get(window);
             if (probs == null) {
                 break;

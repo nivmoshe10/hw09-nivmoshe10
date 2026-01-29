@@ -65,6 +65,7 @@ public class List {
             }
             current = current.next;
         }
+        // If not found, add to beginning as per instructions
         addFirst(chr);
     }
 
