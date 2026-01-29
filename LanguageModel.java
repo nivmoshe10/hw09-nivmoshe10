@@ -58,8 +58,7 @@ public class LanguageModel {
             }
             current = current.next;
         }
-        // If we get here, valid probabilities should have returned something.
-        // As a fallback, return the last element's char.
+        // Fallback: return the last character if something goes slightly wrong with precision
         return probs.get(probs.getSize() - 1).chr;
     }
 
@@ -74,12 +73,12 @@ public class LanguageModel {
 
         // Reads just enough characters to form the first window
         for (int i = 0; i < windowLength; i++) {
-             // Safe readLoop 
             if (!in.isEmpty()) {
                 window += in.readChar();
             }
         }
 
+        // Processes the entire text, one character at a time
         while (!in.isEmpty()) {
             c = in.readChar();
             
@@ -110,11 +109,9 @@ public class LanguageModel {
         String window = initialText.substring(initialText.length() - windowLength);
         String generatedText = initialText;
 
-        // Generate characters until we reach the desired length
         while (generatedText.length() < textLength) {
             List probs = CharDataMap.get(window);
             
-            // If the pattern is unknown, we cannot generate more text
             if (probs == null) {
                 break;
             }
@@ -122,7 +119,6 @@ public class LanguageModel {
             char nextChar = getRandomChar(probs);
             generatedText += nextChar;
             
-            // Update the window for the next iteration
             window = generatedText.substring(generatedText.length() - windowLength);
         }
 
