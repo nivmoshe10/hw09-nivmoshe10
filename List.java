@@ -23,6 +23,10 @@ public class List {
 
     /** Returns the first element in the list */
     public CharData getFirst() {
+        // FIX: Prevents crash when list is empty
+        if (first == null) {
+            return null;
+        }
         return first.cp;
     }
 
@@ -54,21 +58,16 @@ public class List {
      * increments its counter. Otherwise, adds a new CharData object with the
      * given character to the beginning of this list. */
     public void update(char chr) {
-        int index = indexOf(chr);
-        if (index != -1) {
-            // Character exists, update count
-            Node current = first;
-            while (current != null) {
-                if (current.cp.chr == chr) {
-                    current.cp.count++;
-                    return;
-                }
-                current = current.next;
+        Node current = first;
+        while (current != null) {
+            if (current.cp.chr == chr) {
+                current.cp.count++;
+                return;
             }
-        } else {
-            // Character does not exist, add to beginning
-            addFirst(chr);
+            current = current.next;
         }
+        // If we reached here, the character was not found
+        addFirst(chr);
     }
 
     /** If the given character exists in one of the CharData objects in this list,
@@ -79,7 +78,6 @@ public class List {
         while (current != null) {
             if (current.cp.chr == chr) {
                 if (prev == null) {
-                    // Removing the first element
                     first = current.next;
                 } else {
                     prev.next = current.next;
@@ -121,7 +119,6 @@ public class List {
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
     public ListIterator listIterator(int index) {
-        // Assuming ListIterator constructor takes the first node of the iteration
         if (index == 0) return new ListIterator(first);
         Node current = first;
         for (int i = 0; i < index; i++) {
@@ -136,12 +133,11 @@ public class List {
         StringBuilder str = new StringBuilder("(");
         Node current = first;
         while (current != null) {
-            str.append(current.cp.toString()).append(" ");
+            str.append(current.cp.toString());
+            if (current.next != null) {
+                str.append(" ");
+            }
             current = current.next;
-        }
-        // Remove the trailing space and add closing parenthesis
-        if (str.length() > 1) {
-            str.deleteCharAt(str.length() - 1);
         }
         str.append(")");
         return str.toString();
