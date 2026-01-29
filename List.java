@@ -55,18 +55,30 @@ public class List {
 
     /** If the given character exists in one of the CharData objects in this list,
      * increments its counter. Otherwise, adds a new CharData object with the
-     * given character to the beginning of this list. */
+     * given character to the END of this list. */
     public void update(char chr) {
+        // If list is empty, add first
+        if (first == null) {
+            addFirst(chr);
+            return;
+        }
+
         Node current = first;
-        while (current != null) {
+        while (true) {
+            // If character found, update count
             if (current.cp.chr == chr) {
                 current.cp.count++;
                 return;
             }
+            // If we reached the last node and didn't find the char, add it to the end
+            if (current.next == null) {
+                CharData newCharData = new CharData(chr);
+                current.next = new Node(newCharData);
+                size++;
+                return;
+            }
             current = current.next;
         }
-        // If not found, add to beginning as per instructions
-        addFirst(chr);
     }
 
     /** If the given character exists in one of the CharData objects in this list,
