@@ -119,9 +119,7 @@ public class List {
 
     
     public ListIterator listIterator(int index) {
-        
         if (size == 0) return null;
-
         Node current = first;
         int i = 0;
         while (i < index) {
@@ -131,8 +129,7 @@ public class List {
         return new ListIterator(current);
     }
     
-   /** Returns a textual representation of this list. */
-    public String toString() {
+   public String toString() {
         if (first == null) {
             return "";
         }
