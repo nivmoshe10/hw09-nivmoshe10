@@ -117,9 +117,11 @@ public class List {
         return arr;
     }
 
+    
     public ListIterator listIterator(int index) {
-        if (size == 0) return null;
         
+        if (size == 0) return null;
+
         Node current = first;
         int i = 0;
         while (i < index) {
