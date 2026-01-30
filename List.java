@@ -131,19 +131,22 @@ public class List {
         return new ListIterator(current);
     }
     
-    /** Returns a textual representation of this list. */
+   /** Returns a textual representation of this list. */
     public String toString() {
-        if (size == 0) return "()";
-        StringBuilder str = new StringBuilder("(");
-        Node current = first;
-        while (current != null) {
-            str.append(current.cp.toString());
-            if (current.next != null) {
-                str.append(" ");
-            }
-            current = current.next;
+        if (first == null) {
+            return "";
         }
-        str.append(")");
-        return str.toString();
+        StringBuilder res = new StringBuilder("");
+        res.append("(");
+        Node currentNode = first;
+        while (currentNode != null) {
+            res.append(currentNode.cp.toString());
+            if (currentNode.next != null) {
+                res.append(" ");
+            }
+            currentNode = currentNode.next;
+        }
+        res.append(")");
+        return res.toString();
     }
 }
