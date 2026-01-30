@@ -117,21 +117,14 @@ public class List {
         return arr;
     }
 
-    /** Returns an iterator over the elements in this list, starting at the given index. */
     public ListIterator listIterator(int index) {
-        // FIX: Added bounds check to prevent crash in Train tests
-        if (index < 0 || index > size) {
-             // Depending on implementation, index == size might be allowed for iterator start
-             // but usually strictly within bounds for data access.
-             // Safest for iterator is to allow index == size (empty iterator at end).
-        }
-        
-        if (index == 0) return new ListIterator(first);
+        if (size == 0) return null;
         
         Node current = first;
-        for (int i = 0; i < index; i++) {
-            if (current == null) break; // Safety break
+        int i = 0;
+        while (i < index) {
             current = current.next;
+            i++;
         }
         return new ListIterator(current);
     }
